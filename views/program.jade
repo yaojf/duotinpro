@@ -1,0 +1,71 @@
+extends layout
+
+block content
+    div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+        ul.breadcrumb
+            li
+                a(href="/")
+                    i.glyphicon.glyphicon-home
+                span.divider
+            li.active 项目资源管理
+        div
+            form(method="post" action="/static/program/search" class="form-inline")
+                div(class="form-group" style="padding-right: 10px")
+                    div.input-group
+                        label.sr-only  项目名称
+                        input(type="text" value=title name="title" class="form-control" placeholder="请输入项目名称")
+                div(class="form-group" style="padding-right: 10px")
+                    div.input-group
+                        label.sr-only 项目环境
+                        select(class="selectpicker form-control" id="type" name="env")
+                            if env=='nil'
+                                option(value="nil" selected) 请选择
+                            else
+                                option(value="nil") 请选择
+                            if env=='prd'
+                                option(value="prd" selected) 线上环境
+                            else
+                                option(value="prd") 线上环境
+                            if env=='dev'
+                                option(value="dev" selected) 线下环境
+                            else
+                                option(value="dev") 线下环境
+
+                input(type="submit" class="btn btn-default" value="查询")
+                |&nbsp;
+                a(class="btn btn-info" href="/static/program/add" role="button") 新增
+        br
+        if items
+            div.panel.panel-default
+                div.panel-body
+                    table.table
+                        thead
+                            tr
+                                td 项目标题
+                                td 项目环境
+                                td 创建时间
+                                td 修改时间
+                                td 操作
+                        tbody
+                            each item in items
+                                tr
+                                    td= item.program_name
+                                    if item.env=='prd'
+                                        td 线上环境
+                                    else
+                                        td 线下环境
+                                    td= item.created_at.format("yyyy-MM-dd HH:mm:ss")
+                                    td= item.updated_at.format("yyyy-MM-dd HH:mm:ss")
+                                    td
+                                        a(href="/static/program/detail/"+item.id)
+                                            button.btn.btn-success 详情
+                                        |&nbsp;
+                                        a(href="/static/resource/program/"+ item.program_name + "?env=" + item.env)
+                                            button.btn.btn-success 预览
+                                        |&nbsp;
+                                        a(href="/static/program/delete/"+item.id, class="delete")
+                                            button.btn.btn-danger 删除
+
+
+
+    script(src="/javascripts/pages/program.js" type="text/javascript")

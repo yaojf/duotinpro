@@ -1,0 +1,35 @@
+//
+   Created by apple on 15/12/4.
+
+extends layout
+block content
+   div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+      ul.breadcrumb
+         li
+            a(href="/")
+               i.glyphicon.glyphicon-home
+            span.divider
+         li
+            a(href="/static/properties")
+               |静态文件管理
+            span.divider
+         li.active 静态文件新增
+      div
+         form(method="post" action="/static/properties/create" class="form-inline")
+            div(class="form-group" style="padding-right: 10px")
+               div.input-group
+                  label.sr-only 资源文件名称
+                  input(type="text" value="" name="title" id="title" class="form-control" placeholder="请输入资源文件名称")
+            div(class="form-group" style="padding-right: 10px")
+               div.input-group
+                  label.sr-only 资源环境
+                  select(class="selectpicker form-control" id="type" name="env")
+                     option(value="nil") 请选择
+                     option(value="prd") 线上环境
+                     option(value="dev") 线下环境
+
+            input(type="submit" class="btn btn-default save" value="保存")
+      br
+      font(color="red")= error
+
+   script(src="/javascripts/pages/properties.js" type="text/javascript")

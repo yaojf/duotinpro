@@ -1,0 +1,34 @@
+//
+   Created by apple on 15/12/4.
+
+extends layout
+block content
+   div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+      ul.breadcrumb
+         li
+            a(href="/")
+               i.glyphicon.glyphicon-home
+            span.divider
+         li
+            a(href="/static/program")
+               | 项目资源管理
+            span.divider
+         li.active 项目资源新增
+      div
+         form(method="post" action="/static/program/create" class="form-inline")
+            div(class="form-group" style="padding-right: 10px")
+               div.input-group
+                  label.sr-only  项目名称
+                  input(type="text" value="" name="title" id="title" class="form-control" placeholder="请输入项目名称")
+            div(class="form-group" style="padding-right: 10px")
+               div.input-group
+                  label.sr-only 项目环境
+                  select(class="selectpicker form-control" id="type" name="env")
+                     option(value="nil") 请选择
+                     option(value="prd") 线上环境
+                     option(value="dev") 线下环境
+
+            input(type="submit" class="btn btn-default save" value="保存")
+      br
+      font(color="red")= error
+   script(src="/javascripts/pages/properties.js" type="text/javascript")

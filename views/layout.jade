@@ -1,0 +1,33 @@
+doctype html
+html
+  head(lang="en")
+    meta(charset="UTF-8")
+    title 多听静态资源管理
+    link(href="/bootstrap/css/bootstrap.min.css" rel="stylesheet")
+    link(href="/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/dashboard.css')
+    link(rel="shortcut icon" type="image/x-icon" href="http://c3.duotin.com/i1/DT/wK9oUweeIM2fS9hn0_W9fpWjK-82V75WnFk6AT0nhMU.png" media="screen")
+    script(src="/javascripts/jquery/jquery-2.1.3.min.js" type="text/javascript")
+    script(src="/bootstrap/js/bootstrap.min.js" type="text/javascript")
+  body
+    include common/nav
+    div(class="container", style="padding:60px 0")
+        div(id="content")
+            div(class="container-fluid")
+                div(class="row")
+                    div(class="col-sm-3 col-md-2 sidebar")
+                        ul(class="nav nav-sidebar")
+                            li(class="nav-header")
+                                a(href="javascript:void(0);")
+                                    font(color="gray")
+                                        span(aria-hidden="true",class="glyphicon glyphicon-th-large")
+                                        | &nbsp;&nbsp;功能
+                            li(class=properties)
+                                a(href="/static/properties") 静态文件管理
+                            li(class=program)
+                                a(href="/static/program") 项目资源管理
+                    block content
+        footer
+            p(style="text-align: center;") &copy;duotin 2014-2015
+

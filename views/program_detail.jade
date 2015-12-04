@@ -1,0 +1,48 @@
+extends layout
+block content
+    div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+        ul.breadcrumb
+            li
+                a(href="/")
+                    i.glyphicon.glyphicon-home
+                span.divider
+            li
+                a(href="/static/properties") 项目资源管理
+            li.active 项目详情
+        div
+            form(method="post" action="/static/program/detail/" + programId + "/save" class="form-inline")
+                div(class="form-group" style="padding-right: 10px")
+                    div.input-group
+                        label.sr-only 添加文件
+                        select(class="selectpicker form-control" id="type" name="fileId")
+                            option 请选择
+                            if selectItems
+                                each item in selectItems
+                                    option(value=item.id)= item.file_name
+                input(type="submit" class="btn btn-default" value="保存")
+        br
+        if items
+            div.panel.panel-default
+                div.panel-body
+                    table.table
+                        thead
+                            tr
+                                td key
+                                td value
+                                td 创建时间
+                                td 修改时间
+                                td 操作
+                        tbody
+                            each item in items
+                                tr
+                                    td= item.file_name
+                                    if item.env=='prd'
+                                        td 线上环境
+                                    else
+                                        td 线下环境
+                                    td= item.created_at.format("yyyy-MM-dd HH:mm:ss")
+                                    td= item.updated_at.format("yyyy-MM-dd HH:mm:ss")
+                                    td
+                                        a(href="/static/program/detail/" + programId + "/delete/" + item.id, class="delete")
+                                            button.btn.btn-danger 删除
+    script(src="/javascripts/pages/program_detail.js" type="text/javascript")
